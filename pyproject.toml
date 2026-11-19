@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "parcel-boundary-toolkit"
+version = "0.1.0"
+description = "Numbered boundary points, courses and metes-and-bounds descriptions from parcel polygons, with closure and area checks. Python library, command line and ArcGIS Pro toolbox."
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Lina María Quintero Fonseca"}]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+gis = ["geopandas>=0.14", "shapely>=2.0", "pyproj>=3.6"]
+test = ["pytest>=7", "geopandas>=0.14", "shapely>=2.0", "pyproj>=3.6"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
