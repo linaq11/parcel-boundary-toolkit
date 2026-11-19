@@ -3,3 +3,4 @@ __pycache__/
 .pytest_cache/
 examples/output/
 examples/output_pro/
+examples/output_weld/

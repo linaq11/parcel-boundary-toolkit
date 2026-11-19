@@ -62,6 +62,30 @@ b = describe_ring(coords, edge_labels, tolerance=0.1)       # coords in a projec
 print(legal_description(b, Units("feet", "foot"), "Lot 7", "NAD83 / California zone 3 (ftUS)"))
 ```
 
+## Real data check: Weld County, Colorado
+
+`examples/real_parcels_weld_county.py` downloads 100 parcels from a few residential blocks in Greeley from the [Weld County open data service](https://services.arcgis.com/ewjSqmSyHJnkfBLL/arcgis/rest/services/Parcels_open_data/FeatureServer) (geometry, parcel number, subdivision, block, lot and the county's acreage; no owner names or addresses), projects them to NAD83 / Colorado North (ftUS), EPSG:2231, and describes the 65 parcels that are not cut by the edge of the download, naming each neighbour by its parcel number. The data are fetched again on every run and are not stored in the repository.
+
+| Result over 65 parcels | Value |
+|---|---|
+| Digitised vertices per parcel | 4 to 9 |
+| Numbered points per parcel | 4 to 8 |
+| Largest offset of a vertex from its course (0.1 ft tolerance) | 0.004 ft |
+| Misclosure of the description as written | at most 0.0149 ft; worst ratio 1:36,154 |
+| Toolkit area against the county's `GIS_Acres` | −0.008 % to −0.007 % |
+
+The area difference is the same sign and size for every parcel, which points to a difference in how the county computed its acreage rather than to the parcels themselves. A sample description:
+
+```text
+Beginning at Point 1, the point of beginning, with grid coordinates X = 3,223,326.070 and Y = 1,394,225.200;
+thence Due East, a distance of 99.68 feet, along Parcel 096107401005, to Point 2;
+thence S 00°04'08" W, a distance of 80.00 feet, along Parcel 096107401007, to Point 3;
+thence Due West, a distance of 99.58 feet, to Point 4;
+thence Due North, a distance of 80.00 feet, to the point of beginning.
+
+Containing 0.183 acres (7,970 square feet), more or less.
+```
+
 ## Outputs
 
 | File | Content |
